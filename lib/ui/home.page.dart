@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/ui/widgets/_shared/link_text.widget.dart';
+import 'package:spotify/ui/widgets/left_column/left_column.widget.dart';
 import 'package:spotify/ui/widgets/play_bar/music_name.widget.dart';
 
-import 'widgets/music_cover.widget.dart';
+import 'widgets/_shared/music_cover.widget.dart';
+import 'widgets/_shared/resizable.widget.dart';
 import 'widgets/play_bar/play_bar.widget.dart';
-import 'widgets/resizable.widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,27 +25,10 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Row(children: [
               ResizableWidget(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.more_horiz, size: 30),
-                    const Divider(),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: List.generate(
-                              100,
-                              (index) => ListTile(
-                                  contentPadding: const EdgeInsets.all(8.0),
-                                  title: Text((index + 1).toString()))),
-                        ),
-                      ),
-                    ),
-                    if (!isCoverDown) ...[buildMusicCover(state: true)]
-                  ],
-                ),
+                child: LeftColumnWidget(
+                    shouldShowCover: !isCoverDown,
+                    onChangeCoverPosition: () =>
+                        setState(() => isCoverDown = true)),
               ),
               Expanded(
                   child: Column(children: [
@@ -69,10 +54,11 @@ class _HomePageState extends State<HomePage> {
           ),
           PlayBarWidget(
             children: [
+              // TODO: Mover apresentação do MusicCover para dentro de MusicName
               MusicNameWidget(
                   musicCover:
                       isCoverDown ? buildMusicCover(state: false) : null),
-              const Text('meio'),
+              const LinkTextWidget('Meio'),
               const Text('fim')
             ],
           )

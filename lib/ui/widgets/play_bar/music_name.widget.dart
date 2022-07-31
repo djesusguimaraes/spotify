@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/ui/widgets/_shared/link_text.widget.dart';
 import '../../extensions/text_theme.extension.dart';
 
 class MusicNameWidget extends StatefulWidget {
@@ -27,9 +28,10 @@ class _MusicNameWidgetState extends State<MusicNameWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dom Corleone do Gueto',
-                    style: context.textTheme.bodyText2),
-                Text('Eduardo Facção', style: context.textTheme.caption)
+                const LinkTextWidget('Dom Corleone do Gueto', isTittle: true),
+                const SizedBox(height: 4.0),
+                LinkTextWidget('Eduardo Facção',
+                    style: context.textTheme.caption),
               ]),
           const SizedBox(width: 32.0),
           IconButton(
