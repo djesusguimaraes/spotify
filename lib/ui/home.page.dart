@@ -25,10 +25,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Row(children: [
               ResizableWidget(
-                child: LeftColumnWidget(
-                    shouldShowCover: !isCoverDown,
-                    onChangeCoverPosition: () =>
-                        setState(() => isCoverDown = true)),
+                child: LeftColumnWidget(shouldShowCover: !isCoverDown, onChangeCoverPosition: () => setState(() => isCoverDown = true)),
               ),
               Expanded(
                   child: Column(children: [
@@ -47,19 +44,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ))
               ])),
-              ResizableWidget(
-                  axisResizable: AxisResizable.right,
-                  child: Column(children: [Expanded(child: Container())]))
+              ResizableWidget(axisResizable: AxisResizable.right, child: Column(children: [Expanded(child: Container())]))
             ]),
           ),
           PlayBarWidget(
             children: [
-              // TODO: Mover apresentação do MusicCover para dentro de MusicName
-              MusicNameWidget(
-                  musicCover:
-                      isCoverDown ? buildMusicCover(state: false) : null),
+              MusicNameWidget(shouldShowCover: isCoverDown, onChangeCoverPosition: () => setState(() => isCoverDown = false)),
               const LinkTextWidget('Meio'),
-              const Text('fim')
+              const Text('fim'),
             ],
           )
         ]);
@@ -67,8 +59,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  buildMusicCover({required bool state, double? customWidth}) =>
-      MusicCoverWidget(
+  buildMusicCover({required bool state, double? customWidth}) => MusicCoverWidget(
         onChangeCoverPosition: () => setState(() => isCoverDown = state),
         isCoverDown: state,
         dimension: customWidth,

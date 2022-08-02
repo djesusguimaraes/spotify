@@ -26,26 +26,22 @@ class _LinkTextWidgetState extends State<LinkTextWidget> with HoverMixin {
   @override
   Widget build(BuildContext context) {
     return RichText(
-      text: TextSpan(
-        text: widget.text,
-        mouseCursor: SystemMouseCursors.click,
-        onEnter: (event) => setHovering(true),
-        onExit: (event) => setHovering(false),
-        recognizer: TapGestureRecognizer()..onTap = widget.onTap,
-        spellOut: true,
-        style: effectiveTextTheme.copyWith(
-          decoration: textDecoration,
-          color: Colors.transparent,
-          fontWeight: fontWeight,
-          shadows: [Shadow(offset: const Offset(0, -3), color: textColor)],
-          decorationColor: Colors.white,
-        ),
-      ),
-    );
+        text: TextSpan(
+            text: widget.text,
+            mouseCursor: SystemMouseCursors.click,
+            onEnter: (event) => setHovering(true),
+            onExit: (event) => setHovering(false),
+            recognizer: TapGestureRecognizer()..onTap = widget.onTap,
+            spellOut: true,
+            style: effectiveTextTheme.copyWith(
+              decoration: textDecoration,
+              color: textColor,
+              fontWeight: fontWeight,
+              decorationColor: Colors.white,
+            )));
   }
 
-  TextStyle get effectiveTextTheme =>
-      widget.style ?? context.textTheme.bodyText2!;
+  TextStyle get effectiveTextTheme => widget.style ?? context.textTheme.bodyText2!;
 
   TextDecoration? get textDecoration {
     if (isHovering) {

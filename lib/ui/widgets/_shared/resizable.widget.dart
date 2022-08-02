@@ -34,7 +34,7 @@ class _ResizableWidgetState extends State<ResizableWidget> {
   @override
   void initState() {
     width = widget.initialWidth;
-    minWidth = 75;
+    minWidth = 140;
     maxWidth = width * 1.75;
     super.initState();
   }
@@ -42,24 +42,17 @@ class _ResizableWidgetState extends State<ResizableWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      if (widget.axisResizable.isLeft) ...[
-        Container(color: Colors.black, width: width, child: widget.child)
-      ],
+      if (widget.axisResizable.isLeft) ...[Container(color: Colors.black, width: width, child: widget.child)],
       MouseRegion(
         cursor: SystemMouseCursors.resizeColumn,
         child: GestureDetector(
           onHorizontalDragEnd: _handleEndDrag,
           onHorizontalDragUpdate: _handleUpdateDrag,
           onHorizontalDragStart: _handleStarDrag,
-          child: AnimatedContainer(
-              duration: const Duration(milliseconds: 100),
-              color: shouldBeTransparent ? Colors.transparent : Colors.white,
-              width: 1),
+          child: AnimatedContainer(duration: const Duration(milliseconds: 100), color: shouldBeTransparent ? Colors.transparent : Colors.white, width: 1),
         ),
       ),
-      if (widget.axisResizable.isRight) ...[
-        Container(color: Colors.black, width: width, child: widget.child)
-      ],
+      if (widget.axisResizable.isRight) ...[Container(color: Colors.black, width: width, child: widget.child)],
     ]);
   }
 

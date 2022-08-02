@@ -18,15 +18,13 @@ class MusicCoverWidget extends StatefulWidget {
   State<MusicCoverWidget> createState() => _MusicCoverWidgetState();
 }
 
-class _MusicCoverWidgetState extends State<MusicCoverWidget>
-    with SingleTickerProviderStateMixin {
+class _MusicCoverWidgetState extends State<MusicCoverWidget> with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
   bool shouldShowScapeButton = false;
 
   @override
   void initState() {
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 150));
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 150));
     _animationController?.forward();
     super.initState();
   }
@@ -72,13 +70,9 @@ class _MusicCoverWidgetState extends State<MusicCoverWidget>
     );
   }
 
-  Animation<Offset> animation() =>
-      Tween<Offset>(begin: animationOffset, end: Offset.zero).animate(
-          CurvedAnimation(parent: _animationController!, curve: Curves.linear));
+  Animation<Offset> animation() => Tween<Offset>(begin: animationOffset, end: Offset.zero).animate(CurvedAnimation(parent: _animationController!, curve: Curves.linear));
 
-  IconData get icon =>
-      widget.isCoverDown ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up;
+  IconData get icon => widget.isCoverDown ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down;
 
-  Offset get animationOffset =>
-      widget.isCoverDown ? const Offset(0, 1) : const Offset(-1, 0);
+  Offset get animationOffset => widget.isCoverDown ? const Offset(-1, 0) : const Offset(0, 1);
 }
